@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.1.RELEASE</version>
+  </parent>
+
+  <groupId>kz.gov.pki.sample</groupId>
+  <artifactId>springwssample</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>A sample web-service with WSS4J</name>
+  <url>http://pki.gov.kz</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web-services</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>wsdl4j</groupId>
+      <artifactId>wsdl4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.ws</groupId>
+      <artifactId>spring-ws-security</artifactId>
+      <version>3.0.9.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>kz.gov.pki.kalkan</groupId>
+      <artifactId>knca_provider_jce_kalkan</artifactId>
+      <version>0.6.1</version>
+    </dependency>
+    <dependency>
+      <groupId>kz.gov.pki.kalkan</groupId>
+      <artifactId>xmldsig</artifactId>
+      <version>0.3</version>
+    </dependency>
+    <dependency>
+      <!-- xmlsec 2.1.2 and higher is required -->
+      <groupId>kz.gov.pki.kalkan</groupId>
+      <artifactId>jsr105</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.santuario</groupId>
+      <artifactId>xmlsec</artifactId>
+      <version>2.1.5</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
+        </plugin>
+         <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>jaxb2-maven-plugin</artifactId>
+          <version>2.5.0</version>
+          <executions>
+            <execution>
+              <phase>generate-sources</phase>
+              <id>xjc</id>
+              <goals>
+                <goal>xjc</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <sources>
+              <source>${project.basedir}/src/main/resources/xsd/</source>
+            </sources>
+            <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+            <clearOutputDir>false</clearOutputDir>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
